@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+const upload = require("../../middleware/multer");
+
 const {
   getStudentsList,
   getStudentById,
@@ -19,9 +21,9 @@ router.get("/:studentId", getStudentById);
 router.delete("/:studentId", deleteStudent);
 
 // Add student
-router.post("/", addStudent);
+router.post("/",upload.single("image"), addStudent);
 
 // Update student infrmation
-router.put("/:studentId", updateStudent);
+router.put("/:studentId",upload.single("image"), updateStudent);
 
 module.exports = router;

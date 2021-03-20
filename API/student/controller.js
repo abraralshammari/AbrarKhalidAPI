@@ -50,6 +50,11 @@ exports.deleteStudent = async (req, res) => {
 // Add student
 exports.addStudent = async (req, res) => {
   try {
+    //http:// (we will get the protocol and host from the request, 
+    //followed by the name of the image from req.file.)
+    if (req.file) {
+    req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
+    }
     const newStudent = await Student.create(req.body);
     if (newStudent) {
       res.status(201).json(newStudent);
@@ -65,6 +70,9 @@ exports.addStudent = async (req, res) => {
 exports.updateStudent = async (req, res) => {
   const { studentId } = req.params;
   try {
+    if (req.file) {
+      req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
+      }
     const updatedStudent = await Student.findByPk(studentId);
     if (updatedStudent) {
       await updatedStudent.update(req.body);
