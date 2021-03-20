@@ -1,12 +1,25 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
-// const productsRoutes = require("./API/product/itsRoutes");
+
+//route
+const studentRoutes = require("./API/student/route");
+const courseRoute = require("./API/course/route");
+const universityRoute = require("./API/university/route");
+
+//db
 const db = require("./db/models");
+
+//initialize app
 const app = express();
 
 app.use(express.json());
 app.use(cors());
+
+app.use("/students", studentRoutes);
+app.use ("/courses", courseRoute);
+app.use("/universities" , universityRoute);
+
 
 app.get("/test", (_, res) => {
   res.json("Its working");

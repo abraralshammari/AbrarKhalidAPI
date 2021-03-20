@@ -30,7 +30,7 @@ exports.getCourseById = async (req, res) => {
   }
 };
 
-// Delete the student
+// Delete the course
 exports.deleteCourse = async (req, res) => {
   const { courseId } = req.params;
 
@@ -47,10 +47,10 @@ exports.deleteCourse = async (req, res) => {
   }
 };
 
-// Add student
+// Add course
 exports.addCourse = async (req, res) => {
   try {
-    const newCourses = await Courses.create(req.body);
+    const newCourses = await Course.create(req.body);
     if (newCourses) {
       res.status(201).json(newCourses);
     } else {
@@ -61,7 +61,7 @@ exports.addCourse = async (req, res) => {
   }
 };
 
-// Update student information
+// Update course information
 exports.updateCourse = async (req, res) => {
   const { courseId } = req.params;
   try {
